@@ -19,10 +19,5 @@ namespace MauiNoteTakingApp
             base.OnAppearing();
             await _viewModel.LoadNotes();
         }
-
-        private void RefreshViewRefreshing(object sender, EventArgs e)
-        {
-            _viewModel.RefreshCommand.Execute(null);
-        }
     }
 }

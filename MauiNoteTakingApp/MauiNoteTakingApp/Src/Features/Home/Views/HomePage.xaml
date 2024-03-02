@@ -5,7 +5,10 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:behaviors="clr-namespace:MauiNoteTakingApp.Src.Core.Behaviors">
 
-    <RefreshView IsRefreshing="{Binding IsRefreshing}" Refreshing="RefreshViewRefreshing">
+    <RefreshView IsRefreshing="{Binding IsRefreshing}">
+        <RefreshView.Behaviors>
+            <behaviors:EventToCommandBehavior Command="{Binding RefreshCommand}" EventName="Refreshing" />
+        </RefreshView.Behaviors>
         <ListView
             HasUnevenRows="True"
             ItemsSource="{Binding Notes}"
