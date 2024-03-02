@@ -4,12 +4,12 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:MauiNoteTakingApp"
-    Shell.FlyoutBehavior="Disabled"
-    Title="MauiNoteTakingApp">
+    Title="MauiNoteTakingApp"
+    Shell.FlyoutBehavior="Disabled">
 
     <ShellContent
-        Title="Home"
-        ContentTemplate="{DataTemplate local:MainPage}"
-        Route="MainPage" />
+        Title="Beer Notes"
+        ContentTemplate="{DataTemplate local:HomePage}"
+        Route="HomePage" />
 
 </Shell>
