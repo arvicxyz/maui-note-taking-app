@@ -1,6 +1,7 @@
 ﻿using MauiNoteTakingApp.Src.Core.Commands;
 using MauiNoteTakingApp.Src.Core.ViewModels;
 using MauiNoteTakingApp.Src.Features.Home.Entities;
+using MauiNoteTakingApp.Src.Features.Home.Models;
 using MauiNoteTakingApp.Src.Features.Home.Repositories;
 using MauiNoteTakingApp.Src.Features.Home.Services;
 using System.Collections.ObjectModel;
@@ -31,6 +32,21 @@ namespace MauiNoteTakingApp.Src.Features.Home.ViewModels
             Notes = new ObservableCollection<NoteEntity>(notes);
         }
 
+        private async Task Refresh()
+        {
+            IsRefreshing = true;
+            await Task.Delay(2000);
+            await GetNotes();
+            IsRefreshing = false;
+        }
+
+        private void AddNote()
+        {
+            var addNote = new NoteModel("1000", "Test Title", "Test Desc");
+            _notes.Add(addNote);
+            Notes = new ObservableCollection<NoteEntity>(_notes);
+        }
+
         #endregion
 
         #region Public Methods
@@ -40,14 +56,6 @@ namespace MauiNoteTakingApp.Src.Features.Home.ViewModels
             await SetBusyAsync(GetNotes, 2000, "Loading beers...");
         }
 
-        public async Task RefreshNotes()
-        {
-            IsRefreshing = true;
-            await Task.Delay(2000);
-            await GetNotes();
-            IsRefreshing = false;
-        }
-
         #endregion
 
         #region Commands
@@ -55,7 +63,13 @@ namespace MauiNoteTakingApp.Src.Features.Home.ViewModels
         private ICommand? _refreshCommand;
         public ICommand RefreshCommand
         {
-            get { return _refreshCommand ??= new DelegateCommand(async (obj) => await RefreshNotes()); }
+            get { return _refreshCommand ??= new DelegateCommand(async (obj) => await Refresh()); }
+        }
+
+        private ICommand? _addNoteCommand;
+        public ICommand AddNoteCommand
+        {
+            get { return _addNoteCommand ??= new DelegateCommand((obj) => AddNote()); }
         }
 
         #endregion
