@@ -1,4 +1,7 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using CommunityToolkit.Maui;
+using CommunityToolkit.Maui.Maps;
+using CommunityToolkit.Maui.Markup;
+using Microsoft.Extensions.Logging;
 
 namespace MauiNoteTakingApp
 {
@@ -9,6 +12,10 @@ namespace MauiNoteTakingApp
             var builder = MauiApp.CreateBuilder();
             builder
                 .UseMauiApp<App>()
+                .UseMauiCommunityToolkit()
+                .UseMauiCommunityToolkitMarkup()
+                .UseMauiCommunityToolkitMaps("API_KEY")
+                .UseMauiCommunityToolkitMediaElement()
                 .ConfigureFonts(fonts =>
                 {
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
